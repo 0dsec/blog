@@ -269,3 +269,4 @@ function typewriterQuote(el) {
     if (i >= text.length) clearInterval(interval);
   }, 30);
 }
+
