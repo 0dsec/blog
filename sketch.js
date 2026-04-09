@@ -93,9 +93,10 @@ const ART = [
 
 let artW, artH, artDpr, artCharW, artX;
 
-let artCells = null;
-let artBaseYs = null;
-let artRect = null;
+
+let artCells = null;  
+let artBaseYs = null; 
+let artRect = null;  
 
 function updateArtRect() {
   artRect = artCanvas.getBoundingClientRect();
@@ -116,7 +117,7 @@ function resizeArt() {
   artCtx.font = ART_FONT;
   artX = Math.floor((artW - maxLen * artCharW) / 2);
 
-
+  
   const cells = [];
   const baseYs = [];
   for (let i = 0; i < ART.length; i++) {
@@ -168,6 +169,7 @@ function drawArt() {
     artCtx.fillText(ART[lineIdx][charIdx], normalX + offsetX, baseYs[lineIdx]);
   }
 }
+
 
 var cubeAngle = 0;
 var cubeSpeed = 20;           
@@ -293,6 +295,7 @@ cubeEl.addEventListener('mouseleave', function() { cubePaused = false; });
       w: W, h: H
     });
 
+
     const idx = fi;
     face.addEventListener('mousemove', (e) => {
       faceData[idx].mouseX = e.offsetX;
@@ -365,6 +368,7 @@ cubeEl.addEventListener('mouseleave', function() { cubePaused = false; });
         const displacement = Math.sqrt(ddx * ddx + ddy * ddy);
         const displaceFactor = Math.min(1, displacement / 60);
 
+        
         if (displacement < 0.5) {
           const bIdx = (p.brightness * (COLOR_BUCKETS - 1)) | 0;
           ctx.fillStyle = restingColors[bIdx];
@@ -391,7 +395,7 @@ cubeEl.addEventListener('mouseleave', function() { cubePaused = false; });
     }
   }
 
-t
+
   window._drawCubeFrame = drawCubeFrame;
 })();
 
