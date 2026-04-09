@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<link rel="stylesheet" href="style.css">
+
+<script type="importmap">
+  { "imports": { "@chenglou/pretext": "https://esm.sh/@chenglou/pretext" } }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+</head>
+<body>
+
+<div id="top-bar">
+  <canvas id="eq-canvas"></canvas>
+  <a href="https://github.com/0dsec" target="_blank" id="github-link">
+    <img src="images/icons/github.png" alt="GitHub">
+  </a>
+  <div id="music-player">
+    <a id="m-track" href="#" target="_blank"><span id="m-track-text"></span></a>
+    <div id="m-progress"><div id="m-progress-fill"></div></div>
+    <div id="m-controls">
+      <button id="m-prev" title="Previous">&lt;</button>
+      <button id="m-play" title="Play / Pause">&#9654;</button>
+      <button id="m-next" title="Next">&gt;</button>
+      <div id="vol-bar" title="Volume"><div id="vol-fill" style="clip-path:inset(75% 0 0 0)"></div></div>
+    </div>
+  </div>
+</div>
+
+<canvas id="c-art"></canvas>
+
+<div id="cursor"></div>
+
+<div class="scene">
+  <div class="glow"></div>
+  <div class="cube" id="cube">
+    <div class="face front"><canvas></canvas></div>
+    <div class="face back"><canvas></canvas></div>
+    <div class="face right"><canvas></canvas></div>
+    <div class="face left"><canvas></canvas></div>
+    <div class="face top"><canvas></canvas></div>
+    <div class="face bottom"><canvas></canvas></div>
+  </div>
+</div>
+
+<nav id="tag-filter" aria-label="Filter posts by tag"></nav>
+
+<main id="post-list"></main>
+
+<footer id="site-footer">
+  <span class="footer-text">0daze &bull; 2026</span>
+</footer>
+
+<script src="sketch.js"></script>
+<script src="pretext-demo.js"></script>
+<script src="blog.js"></script>
+<script src="music.js"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+## Pretext Live Demo!
+
+So below is an actual live demo of the pretext library. Pretext is a new text layout engine that replaces DOM-based text measurement with a faster, math-driven system that allows for some REALLY cool new features, if youre on webdev twitter you probably have seen this one going around. 
+
+I wanted to use it on the main page but when I did, it just kind of made the page too busy with all the other features I had already implemented. So I decided to actually code this live demo directly in the post. Which is not something I realistically will do all the time. Like this is a full ass feature just to render it in the post like this lol. I linked to a github repo for the original demo I had planned before I did this one if you want to see how this library works. It's surprisingly little code for such a powerful effect. Will definitely be using this for something cool in the future
