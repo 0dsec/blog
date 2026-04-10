@@ -20,7 +20,7 @@ If this is the only thing preventing us from gaining access then that is a probl
 
 That `disabled` attribute is **client-side only**. It tells the browser to grey out the button and ignore clicks, but it doesn't actually stop anything from happening on the server. The data was always there. The filter logic was always there. The only thing standing between you and the "locked" content is a single HTML attribute that the browser owner (you) controls.
 
-All it would take for you to access this content is to open your developer tools and click inspect element. You look for something that looks like:
+All it would take for you to access this content is to open your developer tools (ctrl + shift + i) or you can even right click the element you want to inspect and select Inspect. Then you look for something that looks like:
 
 ```html
 <button class="tag-btn locked" disabled>LOCKED</button>
