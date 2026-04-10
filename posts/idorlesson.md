@@ -58,7 +58,7 @@ One thing I've personally done to find IDOR on **real** websites is I will open 
 - `id=23808`
 - `id=23809`
 
-Did you spot it? the id number id=23807 is missing from the sequence. Now think to yourself, why would they choose to skip this id? Is there something associated with that Id that they don't want us to access? I actually used this very technique last week to find an IDOR on the website of an un-named township located in the US. I was able to find an exposed admin panel that was clearly not meant for public use. Even worse is this admin panel didn't even implement any form of rate limiting to prevent brute force login attempts (don't ask me how I know this, I definitely did not attempt to log in because that would be illegal lol)
+Did you spot it? the id number `id=23807` is missing from the sequence. Now think to yourself, why would they choose to skip this id? Is there something associated with that Id that they don't want us to access? I actually used this very technique last week to find an IDOR on the website of an un-named township located in the US. I was able to find an exposed admin panel that was clearly not meant for public use. Even worse is this admin panel didn't even implement any form of rate limiting to prevent brute force login attempts (don't ask me how I know this, I definitely did not attempt to log in because that would be illegal lol)
 
 Just like we talked about in our post about Broken Access Control, an IDOR is not **always** a critical find. But it absolutely can be and even when it's not, it often points to a loose adherence to best practices and a weak security posture. If you find one, it should trigger something in your brain that tells you to keep poking around until you find a thread worth pulling.
 
