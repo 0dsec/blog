@@ -1,7 +1,7 @@
 [
   {
     "id": 3,
-    "title": "IDOR",
+    "title": "Insecure Direct Object Reference",
     "date": "04-09-2026",
     "tags": ["Cybersec","Web App Hacking","Webdev","Hack This Website","Live Demo"],
     "file": "idor.md",
