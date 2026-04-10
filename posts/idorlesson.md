@@ -4,7 +4,7 @@ There's a real vulnerability hiding on this blog right now, and by the end of th
 
 ## the vulnerability: IDOR
 
-**Insecure Direct Object Reference** IDOR is one of the most common web vulnerabilities in existence and at a base level its dead simple!
+**Insecure Direct Object Reference** is one of the most common web vulnerabilities in existence and at a base level its dead simple!
 
 When a web application lets the user reference a resource by an id, usually a number or a short string, and the server doesn't check whether the user is actually allowed to see that resource, that is an IDOR.
 
