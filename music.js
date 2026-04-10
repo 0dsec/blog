@@ -1,3 +1,4 @@
+/* playlist */
 const playlist = [
    { title: 'IDK', artist: '0daze', file: 'music/IDK.wav' },
    { title: 'level one', artist: '0daze', file: 'music/level1.wav' },
@@ -38,10 +39,15 @@ function loadTrack(index) {
   updateTrackDisplay();
 }
 
+/* play / pause */
+
 function togglePlay() {
   if (playlist.length === 0) return;
   if (!audio.src) loadTrack(0);
   initEQ();
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
 
   if (isPlaying) {
     audio.pause();
@@ -65,7 +71,6 @@ function nextTrack() {
 
 function prevTrack() {
   if (playlist.length === 0) return;
-
   if (audio.currentTime > 3) {
     audio.currentTime = 0;
   } else {
@@ -74,16 +79,15 @@ function prevTrack() {
   }
 }
 
-
 audio.addEventListener('ended', function() {
   nextTrack();
 });
-
 
 btnPlay.addEventListener('click', togglePlay);
 btnNext.addEventListener('click', nextTrack);
 btnPrev.addEventListener('click', prevTrack);
 
+/* volume bar */
 
 const volBar = document.getElementById('vol-bar');
 const volFill = document.getElementById('vol-fill');
@@ -114,6 +118,8 @@ document.addEventListener('mouseup', function() {
   volDragging = false;
 });
 
+/* progress bar */
+
 var progressBar = document.getElementById('m-progress');
 var progressFill = document.getElementById('m-progress-fill');
 
@@ -129,6 +135,8 @@ progressBar.addEventListener('click', function(e) {
   var pct = (e.clientX - rect.left) / rect.width;
   audio.currentTime = pct * audio.duration;
 });
+
+/* eq visualizer */
 
 var eqCanvas = document.getElementById('eq-canvas');
 var eqCtx = eqCanvas.getContext('2d');
@@ -196,7 +204,6 @@ function drawEQ() {
 
   for (var i = 0; i < barCount; i++) {
     var raw = freqData[i * step] / 255;
-
     var val = Math.pow(raw, 0.6);
     var barH = val * h;
 
@@ -224,6 +231,7 @@ function startEQ() {
   requestAnimationFrame(drawEQ);
 }
 
+/* autoplay */
 if (playlist.length > 0) {
   loadTrack(0);
   initEQ();
@@ -233,10 +241,12 @@ if (playlist.length > 0) {
     btnPlay.classList.add('playing');
     startEQ();
   }).catch(function() {
-
     document.addEventListener('click', function autoplayRetry() {
       if (!isPlaying && playlist.length > 0) {
         initEQ();
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
         audio.play().then(function() {
           isPlaying = true;
           btnPlay.innerHTML = '&#10074;&#10074;';
@@ -248,3 +258,4 @@ if (playlist.length > 0) {
     });
   });
 }
+
