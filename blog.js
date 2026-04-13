@@ -16,6 +16,12 @@ async function loadBlog() {
     const res = await fetch('data/posts.json');
     allPosts = await res.json();
 
+    const now = Date.now();
+    allPosts = allPosts.filter(p => {
+      const ts = parsePostDate(p.date);
+      return ts === null || ts <= now;
+    });
+
     allPosts.sort((a, b) => b.id - a.id);
 
     buildTagFilter();
@@ -30,43 +36,47 @@ async function loadBlog() {
   }
 }
 
+function parsePostDate(dateStr) {
+  if (!dateStr) return null;
+  const parts = dateStr.split('-');
+  if (parts.length !== 3) return null;
+  const mm = parseInt(parts[0], 10);
+  const dd = parseInt(parts[1], 10);
+  const yyyy = parseInt(parts[2], 10);
+  if (isNaN(mm) || isNaN(dd) || isNaN(yyyy)) return null;
+  return new Date(yyyy, mm - 1, dd, 23, 59, 59).getTime();
+}
+
+/* tag filter */
 
 function buildTagFilter() {
-
   const tagSet = new Set();
   allPosts.forEach(p => {
     if (p.hidden) return;
     p.tags.forEach(t => tagSet.add(t));
   });
-
   tagSet.delete('LOCKED');
   const tags = ['All', ...Array.from(tagSet).sort(), 'LOCKED'];
 
   tagFilter.innerHTML = tags.map(t => {
     if (t === 'LOCKED') {
-
       return `<button class="tag-btn locked" data-tag="LOCKED" disabled title="LOCKED CONTENT! Try to hack this button!
 Check out the post called Broken Access Control for full tutorial!">LOCKED</button>`;
     }
     return `<button class="tag-btn${t === activeTag ? ' active' : ''}" data-tag="${t}">${t}</button>`;
   }).join('');
 
- 
   tagFilter.addEventListener('click', (e) => {
     const btn = e.target.closest('.tag-btn');
     if (!btn) return;
-
     if (btn.disabled) return;
 
     activeTag = btn.dataset.tag;
 
-
     tagFilter.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-
     openCardId = null;
-    if (window.setCubeReversed) window.setCubeReversed(false);
     if (window.setTabTitle) window.setTabTitle('Welcome to 0daze!');
     renderPosts();
   });
@@ -84,9 +94,9 @@ Check out the post called Broken Access Control for full tutorial!">LOCKED</butt
   }
 }
 
+/* render post cards */
 
 function renderPosts() {
-
   const filtered = activeTag === 'All'
     ? allPosts.filter(p => !p.tags.includes('LOCKED') && !p.hidden)
     : allPosts.filter(p => p.tags.includes(activeTag) && !p.hidden);
@@ -118,10 +128,8 @@ function renderPosts() {
     </article>
   `).join('');
 
-
   postList.querySelectorAll('.card-header').forEach(header => {
     header.addEventListener('click', (e) => {
-
       const tagEl = e.target.closest('.tag');
       if (tagEl) {
         e.stopPropagation();
@@ -131,7 +139,6 @@ function renderPosts() {
           b.classList.toggle('active', b.dataset.tag === tag);
         });
         openCardId = null;
-        if (window.setCubeReversed) window.setCubeReversed(false);
         if (window.setTabTitle) window.setTabTitle('Welcome to 0daze!');
         renderPosts();
         return;
@@ -144,9 +151,10 @@ function renderPosts() {
   });
 }
 
+/* expand / collapse */
+
 async function toggleCard(id) {
   const wasOpen = openCardId === id;
-
 
   if (openCardId !== null) {
     closeCard(openCardId);
@@ -154,13 +162,11 @@ async function toggleCard(id) {
 
   if (wasOpen) {
     openCardId = null;
-    if (window.setCubeReversed) window.setCubeReversed(false);
     if (window.setTabTitle) window.setTabTitle('Welcome to 0daze!');
     return;
   }
 
   openCardId = id;
-  if (window.setCubeReversed) window.setCubeReversed(true);
   const post = allPosts.find(p => p.id === id);
   if (post && window.setTabTitle) window.setTabTitle(post.title);
   await openCard(id);
@@ -185,7 +191,6 @@ async function openCard(id) {
   if (!post) return;
 
   if (post.custom === 'pretext') {
-
     let introHtml = '';
     if (post.file) {
       if (!contentCache[id]) {
@@ -225,6 +230,45 @@ async function openCard(id) {
     return;
   }
 
+  if (post.custom === 'xss') {
+    let introHtml = '';
+    if (post.file) {
+      if (!contentCache[id]) {
+        try {
+          const res = await fetch(`posts/${post.file}`);
+          const mdText = await res.text();
+          contentCache[id] = marked.parse(mdText);
+        } catch (err) {
+          console.error(`Failed to load post ${id} intro:`, err);
+          contentCache[id] = '';
+        }
+      }
+      introHtml = `<div class="markdown-body">${contentCache[id]}</div>`;
+    }
+
+    inner.innerHTML = `
+      ${post.quote ? `<p class="post-quote">${post.quote}</p>` : ''}
+      <div class="post-body">
+        ${introHtml}
+        <div class="xss-stage" id="xss-stage-${id}"></div>
+      </div>
+    `;
+
+    const quoteEl = inner.querySelector('.post-quote');
+    if (quoteEl) typewriterQuote(quoteEl);
+
+    card.classList.add('open');
+    body.style.maxHeight = inner.scrollHeight + 'px';
+
+    requestAnimationFrame(() => {
+      if (window.initXssDemo) {
+        window.initXssDemo(inner.querySelector('.xss-stage'));
+      }
+      body.style.maxHeight = inner.scrollHeight + 'px';
+    });
+    return;
+  }
+
   if (!contentCache[id]) {
     inner.innerHTML = '<p class="loading-msg">loading_</p>';
     card.classList.add('open');
@@ -258,6 +302,8 @@ async function openCard(id) {
   });
 }
 
+/* typewriter quote */
+
 function typewriterQuote(el) {
   const text = el.textContent;
   el.textContent = '';
@@ -269,4 +315,3 @@ function typewriterQuote(el) {
     if (i >= text.length) clearInterval(interval);
   }, 30);
 }
-

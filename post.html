@@ -10,6 +10,7 @@
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
   <script src="pretext-demo.js"></script>
+  <script src="xss-demo.js"></script>
 </head>
 <body>
 
@@ -38,7 +39,7 @@
       loadSinglePost(postId);
     }
 
-
+    /* post loader */
     async function loadSinglePost(id) {
       try {
         const res = await fetch('data/posts.json');
@@ -51,11 +52,17 @@
           return;
         }
 
+        const scheduledTs = parsePostDate(post.date);
+        if (scheduledTs !== null && scheduledTs > Date.now()) {
+          document.getElementById('single-post').innerHTML =
+            '<p class="error-msg">post not found. <a href="index.html">go back</a></p>';
+          return;
+        }
+
         document.title = post.title + ' — 0daze';
 
         let bodyHtml;
         if (post.custom === 'pretext') {
-
           let introHtml = '';
           if (post.file) {
             try {
@@ -68,6 +75,19 @@
           }
           bodyHtml = '<div class="post-body">' + introHtml +
                      '<div class="pretext-stage"><canvas class="pretext-canvas"></canvas></div></div>';
+        } else if (post.custom === 'xss') {
+          let introHtml = '';
+          if (post.file) {
+            try {
+              const introRes = await fetch('posts/' + post.file);
+              const introMd = await introRes.text();
+              introHtml = '<div class="markdown-body">' + marked.parse(introMd) + '</div>';
+            } catch (e) {
+              console.error('Failed to load xss intro:', e);
+            }
+          }
+          bodyHtml = '<div class="post-body">' + introHtml +
+                     '<div class="xss-stage"></div></div>';
         } else {
           const mdRes = await fetch('posts/' + post.file);
           const mdText = await mdRes.text();
@@ -99,6 +119,12 @@
           });
         }
 
+        if (post.custom === 'xss' && window.initXssDemo) {
+          requestAnimationFrame(function() {
+            window.initXssDemo(container.querySelector('.xss-stage'));
+          });
+        }
+
       } catch (err) {
         console.error('Failed to load post:', err);
         document.getElementById('single-post').innerHTML =
@@ -106,6 +132,7 @@
       }
     }
 
+    /* typewriter quote */
     function animateQuote(quoteEl) {
       if (!quoteEl) return;
       var text = quoteEl.textContent;
@@ -117,6 +144,17 @@
         quoteEl.textContent = text.slice(0, i);
         if (i >= text.length) clearInterval(interval);
       }, 30);
+    }
+
+    function parsePostDate(dateStr) {
+      if (!dateStr) return null;
+      var parts = dateStr.split('-');
+      if (parts.length !== 3) return null;
+      var mm = parseInt(parts[0], 10);
+      var dd = parseInt(parts[1], 10);
+      var yyyy = parseInt(parts[2], 10);
+      if (isNaN(mm) || isNaN(dd) || isNaN(yyyy)) return null;
+      return new Date(yyyy, mm - 1, dd, 23, 59, 59).getTime();
     }
   </script>
 </body>

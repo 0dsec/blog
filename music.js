@@ -1,11 +1,10 @@
 /* playlist */
 const playlist = [
+  { title: 'someshit', artist: '0daze', file: 'music/level5.wav' },
    { title: 'IDK', artist: '0daze', file: 'music/IDK.wav' },
    { title: 'level one', artist: '0daze', file: 'music/level1.wav' },
    { title: 'level two', artist: '0daze', file: 'music/level2.wav' },
    { title: 'Boss 1', artist: '0daze', file: 'music/Boss1.wav' },
-   { title: 'Character Select', artist: '0daze', file: 'music/Character Select.wav' },
-   { title: 'Continue Screen', artist: '0daze', file: 'music/Continue Screen.wav' },
 ];
 
 let currentTrack = 0;
