@@ -1,6 +1,6 @@
 ## Let's learn to manipulate a url!
 
-There's a real vulnerability hiding on this blog right now, and this is a tutorial on how to find and exploit it. Your goal will be to find a page not obviously linked to the user accessible areas of the page.
+There's a real vulnerability hiding on this blog right now, and this is a tutorial on how to find and exploit it. Your goal will be to find a page not obviously linked to the user accessible areas of this website.
 
 ## the vulnerability: IDOR
 
