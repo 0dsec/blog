@@ -251,6 +251,8 @@ a:hover { opacity: 0.75; }
 #c-art {
   display: block;
   margin-top: 40px;
+  max-width: 100%;
+  height: auto;
   animation: fadeIn 0.4s ease-out 0.2s both;
 }
 
@@ -780,4 +782,57 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 
   .card-header { padding: 0.85rem 1rem; }
   .card-body-inner { padding: 0 1rem 1rem; }
+
+  /* music player shrinks to fit narrow screens */
+  #music-player {
+    right: 8px;
+    top: 8px;
+  }
+
+  #m-track,
+  #m-progress {
+    width: 90px;
+  }
+
+  #music-player button {
+    width: 24px;
+    height: 24px;
+    font-size: 0.6rem;
+  }
+
+  #m-controls { gap: 4px; }
+
+  #vol-bar {
+    width: 10px;
+    height: 24px;
+    margin-left: 4px;
+  }
+
+  #github-link {
+    top: 12px;
+    left: 12px;
+  }
+
+  #github-link img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 420px) {
+  /* even tighter for phones */
+  #m-track,
+  #m-progress {
+    width: 70px;
+  }
+
+  #music-player button {
+    width: 22px;
+    height: 22px;
+  }
+
+  #github-link img {
+    width: 20px;
+    height: 20px;
+  }
 }
