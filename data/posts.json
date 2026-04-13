@@ -5,7 +5,7 @@
     "date": "04-09-2026",
     "tags": ["Cybersec","Web App Hacking","Webdev","Hack This Website","Live Demo"],
     "file": "idor.md",
-    "quote": "You little fuckin cyber criminal!",
+    "quote": "ayyyyyyy you found it!",
     "description": "hidden lesson.",
     "hidden": true
   },
@@ -49,6 +49,15 @@
   },
   {
     "id": 6,
+    "title": "Insecure Direct Object Reference",
+    "date": "04-12-2026",
+    "tags": ["Cybersec","Web App Hacking","Webdev","Hack This Website","Live Demo"],
+    "file": "idorlesson.md",
+    "quote": "client side validation is a suggestion, not a wall!",
+    "description": "more ways to access things you should not have access to lol"
+  },
+  {
+    "id": 7,
     "title": "The Music On This Page!",
     "date": "04-30-2026",
     "tags": ["Music", "GameDev"],
@@ -57,7 +66,7 @@
     "description": "Do you like 2000s era ps1 slop?!"
   },
   {
-    "id": 7,
+    "id": 8,
     "title": "Pretext Live Demo",
     "date": "05-07-2026",
     "tags": ["Webdev","JS", "Programming", "Live Demo"],
@@ -68,7 +77,7 @@
     "repo": "https://github.com/0dsec/Pretext-Demo"
   },
   {
-    "id": 8,
+    "id": 9,
     "title": "Pirating Without Getting Caught!",
     "date": "05-14-2026",
     "tags": ["Cybersec", "Piracy", "OPSEC"],
@@ -77,22 +86,13 @@
     "description": "It's EASY!"
   }, 
   {
-    "id": 9,
+    "id": 10,
     "title": "I <3 Tarkovsky",
     "date": "05-28-2026",
     "tags": ["Movies", "Art"],
     "file": "tark.md",
     "quote": "Stalker by Andrei Tarkovsky (1979)",
     "description": "If you've never watched stalker go do that fr"
-  },
-  {
-    "id": 10,
-    "title": "Insecure Direct Object Reference",
-    "date": "06-05-2026",
-    "tags": ["Cybersec","Web App Hacking","Webdev","Hack This Website","Live Demo"],
-    "file": "idorlesson.md",
-    "quote": "client side validation is a suggestion, not a wall!",
-    "description": "more ways to access things you should not have access to lol"
   },
   {
     "id": 11,
