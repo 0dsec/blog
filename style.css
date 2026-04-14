@@ -339,6 +339,28 @@ a:hover { opacity: 0.75; }
   transition: border-color var(--transition), background var(--transition);
 }
 
+.post-card.pinned {
+  background: linear-gradient(to right, rgba(0, 255, 70, 0.08), transparent 50%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  animation: pinnedWash 2.4s ease-in-out infinite;
+}
+
+@keyframes pinnedWash {
+  0%, 100% { background-size: 30% 100%; }
+  50%      { background-size: 100% 100%; }
+}
+
+.pinned-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: #4a90ff;
+  background: rgba(74, 144, 255, 0.1);
+  border: 1px solid rgba(74, 144, 255, 0.35);
+  padding: 0.1rem 0.4rem;
+  font-weight: 600;
+}
+
 body.initial-load .post-card {
   opacity: 0;
   animation: cascadeIn 0.5s ease-out forwards;
@@ -372,6 +394,10 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 }
 
 .post-card.open {
+  border-color: var(--tag-border);
+}
+
+.post-card.open:hover {
   border-color: var(--tag-border);
 }
 

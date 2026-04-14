@@ -22,7 +22,11 @@ async function loadBlog() {
       return ts === null || ts <= now;
     });
 
-    allPosts.sort((a, b) => b.id - a.id);
+    allPosts.sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+      return b.id - a.id;
+    });
 
     buildTagFilter();
     renderPosts();
@@ -107,10 +111,11 @@ function renderPosts() {
   }
 
   postList.innerHTML = filtered.map(post => `
-    <article class="post-card" data-id="${post.id}">
+    <article class="post-card${post.pinned ? ' pinned' : ''}" data-id="${post.id}">
       <div class="card-header">
         <div class="post-meta-row">
           <time class="post-date">${post.date}</time>
+          ${post.pinned ? '<span class="pinned-label">PINNED</span>' : ''}
           <div class="post-tags">
             ${post.tags.map(t => `<span class="tag" data-tag="${t}">${t}</span>`).join('')}
           </div>
@@ -118,7 +123,7 @@ function renderPosts() {
         <div class="post-title">${post.title}</div>
         <div class="post-desc">${post.description}</div>
         <div class="card-actions">
-          <a href="post.html?id=${post.id}" class="open-tab-link" onclick="event.stopPropagation()">open in new tab &rarr;</a>
+          <a href="post.html?id=${post.id}" target="_blank" rel="noopener" class="open-tab-link" onclick="event.stopPropagation()">open in new tab &rarr;</a>
           ${post.repo ? `<a href="${post.repo}" target="_blank" class="repo-link" onclick="event.stopPropagation()" title="View repo"><img src="images/icons/github.png" alt="GitHub repo"></a>` : ''}
         </div>
       </div>

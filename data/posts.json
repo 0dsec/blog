@@ -5,7 +5,7 @@
     "date": "04-09-2026",
     "tags": ["Cybersec","Web App Hacking","Webdev","Hack This Website","Live Demo"],
     "file": "idor.md",
-    "quote": "ayyyyyyy you found it!",
+    "quote": "You little fuckin cyber criminal!",
     "description": "hidden lesson.",
     "hidden": true
   },
@@ -49,21 +49,22 @@
   },
   {
     "id": 6,
+    "title": "Do you need a website made?",
+    "date": "04-13-2026",
+    "tags": [],
+    "file": "websitead.md",
+    "quote": "Thanks for taking a look!",
+    "description": "Placeholder!",
+    "pinned": "true"
+  },
+  {
+    "id": 7,
     "title": "Insecure Direct Object Reference",
-    "date": "04-12-2026",
+    "date": "04-13-2026",
     "tags": ["Cybersec","Web App Hacking","Webdev","Hack This Website","Live Demo"],
     "file": "idorlesson.md",
     "quote": "client side validation is a suggestion, not a wall!",
     "description": "more ways to access things you should not have access to lol"
-  },
-  {
-    "id": 7,
-    "title": "The Music On This Page!",
-    "date": "04-30-2026",
-    "tags": ["Music", "GameDev"],
-    "file": "music.md",
-    "quote": "Thanks for listening!",
-    "description": "Do you like 2000s era ps1 slop?!"
   },
   {
     "id": 8,

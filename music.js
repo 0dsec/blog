@@ -257,4 +257,3 @@ if (playlist.length > 0) {
     });
   });
 }
-
