@@ -1,1 +1,3 @@
-This is a test
+Do you want a personal blog or website made? Let me do it! Pricing is something we can discuss based on what features you need. A simple static front end webpage will be cheaper and is honestly preferable, as this is just my side gig at the moment. That being said I am capable and willing to help you with full stack development with some negotiation and consideration.
+
+The website you're on right now is a static front end website. It's programmed entirely in vanilla js. If you want fancy 3d animations, music players with custom visualizers, or cool stuff like animated ascii art I can do all that! I will eventually make some posts with demos of different things that can be done in browser to make your website stand out, and when I do I'll link them at the bottom of this post. Thanks for taking a look and if you are interested in dicussing pricing I can be reached @ `0dze@pm.me`
