@@ -941,7 +941,10 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 #post-list,
 #single-post,
 #site-footer {
-  max-width: 100vw;
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 600px) {
