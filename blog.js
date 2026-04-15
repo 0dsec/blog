@@ -3,6 +3,7 @@ marked.setOptions({ breaks: true, gfm: true });
 let allPosts = [];
 let activeTag = 'All';
 let openCardId = null;
+let openRequestToken = 0;
 const contentCache = {};
 
 const tagFilter = document.getElementById('tag-filter');
@@ -82,6 +83,7 @@ Check out the post called Broken Access Control for full tutorial!">LOCKED</butt
     if (btn.disabled) return;
 
     activeTag = btn.dataset.tag;
+    openRequestToken++;
 
     tagFilter.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -146,6 +148,7 @@ function renderPosts() {
         e.stopPropagation();
         const tag = tagEl.dataset.tag;
         activeTag = tag;
+        openRequestToken++;
         tagFilter.querySelectorAll('.tag-btn').forEach(b => {
           b.classList.toggle('active', b.dataset.tag === tag);
         });
@@ -173,14 +176,18 @@ async function toggleCard(id) {
 
   if (wasOpen) {
     openCardId = null;
+    openRequestToken++;
     if (window.setTabTitle) window.setTabTitle('Welcome to 0daze!');
     return;
   }
 
   openCardId = id;
+  openRequestToken++;
+  const requestToken = openRequestToken;
+
   const post = allPosts.find(p => p.id === id);
   if (post && window.setTabTitle) window.setTabTitle(post.title);
-  await openCard(id);
+  await openCard(id, requestToken);
 }
 
 function closeCard(id) {
@@ -196,9 +203,12 @@ function syncOpenCardHeight(id) {
   const body = document.getElementById(`body-${id}`);
   const inner = document.getElementById(`inner-${id}`);
   if (!body || !inner) return;
+  if (openCardId !== id) return;
 
   requestAnimationFrame(() => {
-    body.style.maxHeight = inner.scrollHeight + 'px';
+    if (openCardId === id) {
+      body.style.maxHeight = inner.scrollHeight + 'px';
+    }
   });
 }
 
@@ -247,7 +257,7 @@ function bindDynamicHeightWatchers(id) {
   }, 500);
 }
 
-async function openCard(id) {
+async function openCard(id, requestToken) {
   const card = document.querySelector(`.post-card[data-id="${id}"]`);
   const body = document.getElementById(`body-${id}`);
   const inner = document.getElementById(`inner-${id}`);
@@ -256,6 +266,8 @@ async function openCard(id) {
   const post = allPosts.find(p => p.id === id);
   if (!post) return;
 
+  const isStale = () => requestToken !== openRequestToken || openCardId !== id;
+
   if (post.custom === 'pretext') {
     let introHtml = '';
     if (post.file) {
@@ -263,14 +275,18 @@ async function openCard(id) {
         try {
           const res = await fetch(`posts/${post.file}`);
           const mdText = await res.text();
+          if (isStale()) return;
           contentCache[id] = marked.parse(mdText);
         } catch (err) {
           console.error(`Failed to load post ${id} intro:`, err);
+          if (isStale()) return;
           contentCache[id] = '';
         }
       }
       introHtml = `<div class="markdown-body">${contentCache[id]}</div>`;
     }
+
+    if (isStale()) return;
 
     inner.innerHTML = `
       ${post.quote ? `<p class="post-quote">${post.quote}</p>` : ''}
@@ -288,17 +304,20 @@ async function openCard(id) {
     const quoteEl = inner.querySelector('.post-quote');
     if (quoteEl) {
       typewriterQuote(quoteEl, () => {
-        if (openCardId === id) syncOpenCardHeight(id);
+        if (openCardId === id && requestToken === openRequestToken) {
+          syncOpenCardHeight(id);
+        }
       });
     }
 
     bindDynamicHeightWatchers(id);
 
     requestAnimationFrame(() => {
+      if (isStale()) return;
       if (window.initPretextDemo) {
         window.initPretextDemo(inner.querySelector('.pretext-stage'));
       }
-      if (openCardId === id) syncOpenCardHeight(id);
+      syncOpenCardHeight(id);
     });
     return;
   }
@@ -310,14 +329,18 @@ async function openCard(id) {
         try {
           const res = await fetch(`posts/${post.file}`);
           const mdText = await res.text();
+          if (isStale()) return;
           contentCache[id] = marked.parse(mdText);
         } catch (err) {
           console.error(`Failed to load post ${id} intro:`, err);
+          if (isStale()) return;
           contentCache[id] = '';
         }
       }
       introHtml = `<div class="markdown-body">${contentCache[id]}</div>`;
     }
+
+    if (isStale()) return;
 
     inner.innerHTML = `
       ${post.quote ? `<p class="post-quote">${post.quote}</p>` : ''}
@@ -333,17 +356,20 @@ async function openCard(id) {
     const quoteEl = inner.querySelector('.post-quote');
     if (quoteEl) {
       typewriterQuote(quoteEl, () => {
-        if (openCardId === id) syncOpenCardHeight(id);
+        if (openCardId === id && requestToken === openRequestToken) {
+          syncOpenCardHeight(id);
+        }
       });
     }
 
     bindDynamicHeightWatchers(id);
 
     requestAnimationFrame(() => {
+      if (isStale()) return;
       if (window.initXssDemo) {
         window.initXssDemo(inner.querySelector('.xss-stage'));
       }
-      if (openCardId === id) syncOpenCardHeight(id);
+      syncOpenCardHeight(id);
     });
     return;
   }
@@ -356,12 +382,16 @@ async function openCard(id) {
     try {
       const res = await fetch(`posts/${post.file}`);
       const mdText = await res.text();
+      if (isStale()) return;
       contentCache[id] = marked.parse(mdText);
     } catch (err) {
       console.error(`Failed to load post ${id}:`, err);
+      if (isStale()) return;
       contentCache[id] = '<p class="error-msg">failed to load content.</p>';
     }
   }
+
+  if (isStale()) return;
 
   inner.innerHTML = `
     ${post.quote ? `<p class="post-quote">${post.quote}</p>` : ''}
@@ -374,7 +404,9 @@ async function openCard(id) {
   const quoteEl = inner.querySelector('.post-quote');
   if (quoteEl) {
     typewriterQuote(quoteEl, () => {
-      if (openCardId === id) syncOpenCardHeight(id);
+      if (openCardId === id && requestToken === openRequestToken) {
+        syncOpenCardHeight(id);
+      }
     });
   }
 
