@@ -75,7 +75,8 @@ function buildTagFilter() {
         <span class="locked-tag-wrap">
           <button class="tag-btn locked" data-tag="LOCKED" disabled>LOCKED</button>
           <span class="locked-tooltip" role="tooltip">
-            LOCKED CONTENT! Try to hack this button!<br>
+            LOCKED CONTENT!<br> 
+            Try to hack this button!<br>
             Check out the post called Broken Access Control for full tutorial!
           </span>
         </span>
