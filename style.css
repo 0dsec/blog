@@ -37,7 +37,7 @@ a, button, [role="button"], label, select, summary,
 }
 
 p, span, h1, h2, h3, h4, h5, h6, li, td, th, blockquote,
-input, textarea, .post-desc, .post-body, .markdown-body,
+input, textarea, .post-body, .markdown-body,
 #content, .single-article {
   cursor: url('cursor/Text.cur'), text;
 }
@@ -395,6 +395,11 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   user-select: none;
   position: relative;
   overflow: hidden;
+}
+
+.card-header,
+.card-header * {
+  cursor: url('cursor/Link.cur'), pointer;
 }
 
 .card-header::before {
