@@ -215,13 +215,19 @@ function bindDynamicHeightWatchers(id) {
     ro.observe(inner);
   }
 
-  inner.querySelectorAll('img').forEach(img => {
-    if (img.complete) return;
-    img.addEventListener('load', () => {
-      if (openCardId === id) {
-        syncOpenCardHeight(id);
-      }
-    });
+  inner.querySelectorAll('img, iframe').forEach(el => {
+    if (el.tagName === 'IMG' && !el.complete) {
+      el.addEventListener('load', () => {
+        if (openCardId === id) syncOpenCardHeight(id);
+      });
+      return;
+    }
+
+    if (el.tagName === 'IFRAME') {
+      el.addEventListener('load', () => {
+        if (openCardId === id) syncOpenCardHeight(id);
+      });
+    }
   });
 
   if (document.fonts && document.fonts.ready) {

@@ -5,7 +5,7 @@ var _typeTitle = 'Welcome to 0daze!';
 var _typeDir = 1;
 var _typeTimer = null;
 var _tabHidden = false;
-var _hiddenMessages = ['Hey! what are you doing!?', '👀👀👀👀👀👀👀👀👀👀', 'Can I see!?', '👀👀👀👀👀👀👀👀👀👀'];
+var _hiddenMessages = ['Hey! what are you doing!?', '👁️👁️👁️👁️👁️👁️👁️👁️👁️👁️', 'Can I see!?', '👁️👁️👁️👁️👁️👁️👁️👁️👁️👁️'];
 var _hiddenIndex = 0;
 var _hiddenTimer = null;
 

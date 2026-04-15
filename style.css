@@ -68,48 +68,6 @@ a:hover { opacity: 0.75; }
   color: var(--text-bright);
 }
 
-/* -------------------------------------------------------------------------- */
-/* MOBILE OVERFLOW & LAYOUT SHIFT FIXES                                       */
-/* -------------------------------------------------------------------------- */
-
-.post-title,
-.post-desc,
-.post-quote,
-.markdown-body,
-.markdown-body p,
-.markdown-body li,
-.markdown-body blockquote,
-.markdown-body td,
-.markdown-body th,
-.markdown-body a,
-.tag {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-.card-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-  will-change: max-height;
-}
-
-.card-body-inner {
-  min-width: 0;
-}
-
-.markdown-body pre {
-  max-width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.markdown-body table {
-  display: block;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
 /* top bar */
 #top-bar {
   position: fixed;
@@ -313,6 +271,7 @@ a:hover { opacity: 0.75; }
   animation: fadeIn 0.4s ease-out 0.2s both;
 }
 
+
 /* tag filter */
 #tag-filter {
   width: 100%;
@@ -408,8 +367,14 @@ body.initial-load .post-card:nth-child(10) { animation-delay: 1.4s; }
 body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 
 @keyframes cascadeIn {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .post-card:hover {
@@ -461,7 +426,7 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 
 @keyframes cardHeaderWash {
   0%, 100% { background-size: 30% 100%; }
-  50% { background-size: 100% 100%; }
+  50%      { background-size: 100% 100%; }
 }
 
 .card-header:hover .post-title {
@@ -498,6 +463,8 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   letter-spacing: 0.04em;
   cursor: pointer;
   transition: background var(--transition);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .tag:hover {
@@ -511,12 +478,16 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   color: var(--text-bright);
   transition: color var(--transition);
   margin-bottom: 0.3rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .post-desc {
   font-size: 0.8rem;
   color: var(--text-dim);
   line-height: 1.5;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .card-actions {
@@ -564,9 +535,17 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   opacity: 1;
 }
 
+.card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  will-change: max-height;
+}
+
 .card-body-inner {
   padding: 0 1.25rem 1.25rem;
   border-top: 1px solid var(--border);
+  min-width: 0;
 }
 
 .post-quote {
@@ -576,6 +555,8 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   padding: 0.75rem 0 0.5rem;
   min-height: 1.6em;
   visibility: hidden;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .pretext-stage {
@@ -601,12 +582,68 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   margin-top: 0.5rem;
 }
 
-/* markdown styling */
+.xss-search-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.xss-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  padding: 0.4rem 0.65rem;
+  outline: none;
+}
+
+.xss-input:focus {
+  border-color: var(--tag-border);
+}
+
+.xss-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.xss-btn:hover {
+  border-color: var(--tag-border);
+  color: var(--accent);
+}
+
+.xss-results {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text);
+  padding: 0.75rem;
+  border: 1px dashed var(--border);
+  min-height: 2.5rem;
+  word-break: break-all;
+}
+
+.xss-label {
+  color: var(--text-dim);
+}
+
+.xss-hint {
+  color: var(--text-dim);
+  font-style: italic;
+}
 
 .markdown-body {
   font-size: 0.88rem;
   line-height: 1.8;
   color: var(--text);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .markdown-body h1,
@@ -625,7 +662,11 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 .markdown-body h3 { font-size: 0.95rem; color: var(--text); }
 .markdown-body h4 { font-size: 0.88rem; color: var(--text-dim); }
 
-.markdown-body p { margin-bottom: 1rem; }
+.markdown-body p {
+  margin-bottom: 1rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 
 .markdown-body ul,
 .markdown-body ol {
@@ -633,7 +674,11 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   margin-bottom: 1rem;
 }
 
-.markdown-body li { margin-bottom: 0.3rem; }
+.markdown-body li {
+  margin-bottom: 0.3rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 .markdown-body li::marker { color: var(--text-dim); }
 
 .markdown-body a {
@@ -641,6 +686,8 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   text-decoration: underline;
   text-decoration-color: rgba(0, 255, 70, 0.3);
   text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .markdown-body a:hover {
@@ -654,6 +701,8 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   color: var(--text-dim);
   font-style: italic;
   margin: 1rem 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .markdown-body code {
@@ -670,6 +719,9 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   border: 1px solid var(--border);
   padding: 1rem 1.2rem;
   margin: 1rem 0;
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
   line-height: 1.6;
 }
 
@@ -683,8 +735,33 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 
 .markdown-body img {
   max-width: 100%;
+  height: auto;
   border: 1px solid var(--border);
   margin: 1rem 0;
+}
+
+.markdown-body iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+}
+
+.video-embed {
+  width: 100%;
+  max-width: 100%;
+  margin: 1rem 0;
+}
+
+.video-embed iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
 }
 
 .markdown-body hr {
@@ -698,6 +775,9 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   border-collapse: collapse;
   margin: 1rem 0;
   font-size: 0.82rem;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .markdown-body th,
@@ -705,6 +785,8 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   border: 1px solid var(--border);
   padding: 0.5rem 0.75rem;
   text-align: left;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .markdown-body th {
@@ -755,7 +837,7 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 
 @keyframes blink {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  50%      { opacity: 0; }
 }
 
 .error-msg {
@@ -794,8 +876,6 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   letter-spacing: 0.1em;
 }
 
-/* responsive */
-
 @media (max-width: 600px) {
   html { font-size: 14px; }
   #c-art { margin-top: 20px; }
@@ -813,7 +893,9 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   }
 
   #m-track,
-  #m-progress { width: 90px; }
+  #m-progress {
+    width: 90px;
+  }
 
   #music-player button {
     width: 24px;
@@ -838,11 +920,17 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
     width: 22px;
     height: 22px;
   }
+
+  .pretext-stage {
+    height: 300px;
+  }
 }
 
 @media (max-width: 420px) {
   #m-track,
-  #m-progress { width: 70px; }
+  #m-progress {
+    width: 70px;
+  }
 
   #music-player button {
     width: 22px;
@@ -852,5 +940,9 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   #github-link img {
     width: 20px;
     height: 20px;
+  }
+
+  .pretext-stage {
+    height: 240px;
   }
 }
