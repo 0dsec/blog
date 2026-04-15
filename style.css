@@ -336,7 +336,20 @@ a:hover { opacity: 0.75; }
   border: 1px solid var(--border);
   background: var(--bg-card);
   margin-bottom: 0.75rem;
+  overflow: hidden;
   transition: border-color var(--transition), background var(--transition);
+}
+
+.post-card.pinned > .card-header {
+  background: linear-gradient(to right, rgba(0, 255, 70, 0.08), transparent 50%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  animation: pinnedWash 2.4s ease-in-out infinite;
+}
+
+@keyframes pinnedWash {
+  0%, 100% { background-size: 30% 100%; }
+  50%      { background-size: 100% 100%; }
 }
 
 .pinned-label {
@@ -393,40 +406,6 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   padding: 1rem 1.25rem;
   cursor: pointer;
   user-select: none;
-  position: relative;
-  overflow: hidden;
-}
-
-.card-header::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgba(0, 255, 70, 0.08), transparent 50%);
-  background-size: 30% 100%;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-  pointer-events: none;
-}
-
-.card-header > * {
-  position: relative;
-  z-index: 1;
-}
-
-.post-card.open > .card-header::before {
-  opacity: 1;
-  animation: cardHeaderWash 2.4s ease-in-out infinite;
-}
-
-.post-card:not(.open) > .card-header::before {
-  opacity: 0;
-  animation: none;
-}
-
-@keyframes cardHeaderWash {
-  0%, 100% { background-size: 30% 100%; }
-  50%      { background-size: 100% 100%; }
 }
 
 .card-header:hover .post-title {

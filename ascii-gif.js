@@ -31,9 +31,9 @@ function initAsciiGif() {
 
   _aContainer.innerHTML = '';
   _aCanvas = document.createElement('canvas');
-  _aCanvas.width = 900;
-  _aCanvas.height = 500;
-  _aCanvas.style.display = 'block';
+  _aCanvas.width = 1;
+  _aCanvas.height = 1;
+  _aCanvas.style.display = 'none';
   _aCanvas.style.margin = '0 auto';
   _aCanvas.style.width = '100%';
   _aCanvas.style.height = 'auto';
@@ -143,6 +143,7 @@ async function loadGifFrames(url) {
   _aCols = cols;
   _aRows = rows;
 
+  _aCanvas.style.display = 'block';
   _aReady = true;
 }
 
