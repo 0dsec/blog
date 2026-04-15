@@ -339,7 +339,7 @@ a:hover { opacity: 0.75; }
   transition: border-color var(--transition), background var(--transition);
 }
 
-.post-card.pinned {
+.post-card.pinned > .card-header {
   background: linear-gradient(to right, rgba(0, 255, 70, 0.08), transparent 50%);
   background-size: 100% 100%;
   background-repeat: no-repeat;
