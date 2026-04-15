@@ -28,6 +28,9 @@ html {
   font-size: 15px;
   -webkit-font-smoothing: antialiased;
   cursor: url('cursor/Alternate.cur'), auto;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 a, button, [role="button"], label, select, summary,
@@ -46,6 +49,7 @@ body {
   background: var(--bg);
   color: var(--text);
   width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -251,8 +255,10 @@ a:hover { opacity: 0.75; }
 #c-art {
   display: block;
   margin-top: 40px;
+  width: 100%;
   max-width: 100%;
   height: auto;
+  overflow: hidden;
   animation: fadeIn 0.4s ease-out 0.2s both;
 }
 
@@ -266,6 +272,7 @@ a:hover { opacity: 0.75; }
   display: block;
   margin: -20px auto 20px;
   padding: 0 16px;
+  width: 100%;
   max-width: 920px;
   overflow: hidden;
   animation: fadeIn 0.4s ease-out 0.2s both;
@@ -932,15 +939,31 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 }
 
 @media (max-width: 600px) {
-  html { font-size: 14px; }
-  #c-art { margin-top: 20px; }
+  html {
+    font-size: 14px;
+  }
+
+  #c-art {
+    margin-top: 20px;
+  }
+
+  #ascii-gif {
+    padding: 0 8px;
+  }
 
   #tag-filter,
   #post-list,
-  #single-post { padding: 0 1rem; }
+  #single-post {
+    padding: 0 1rem;
+  }
 
-  .card-header { padding: 0.85rem 1rem; }
-  .card-body-inner { padding: 0 1rem 1rem; }
+  .card-header {
+    padding: 0.85rem 1rem;
+  }
+
+  .card-body-inner {
+    padding: 0 1rem 1rem;
+  }
 
   #music-player {
     right: 20px;
