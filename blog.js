@@ -11,6 +11,12 @@ const postList  = document.getElementById('post-list');
 document.body.classList.add('initial-load');
 loadBlog();
 
+window.addEventListener('resize', () => {
+  if (openCardId !== null) {
+    syncOpenCardHeight(openCardId);
+  }
+});
+
 async function loadBlog() {
   try {
     const res = await fetch('data/posts.json');
@@ -186,6 +192,55 @@ function closeCard(id) {
   body.style.maxHeight = '0';
 }
 
+function syncOpenCardHeight(id) {
+  const body = document.getElementById(`body-${id}`);
+  const inner = document.getElementById(`inner-${id}`);
+  if (!body || !inner) return;
+
+  requestAnimationFrame(() => {
+    body.style.maxHeight = inner.scrollHeight + 'px';
+  });
+}
+
+function bindDynamicHeightWatchers(id) {
+  const inner = document.getElementById(`inner-${id}`);
+  if (!inner) return;
+
+  if (window.ResizeObserver) {
+    const ro = new ResizeObserver(() => {
+      if (openCardId === id) {
+        syncOpenCardHeight(id);
+      }
+    });
+    ro.observe(inner);
+  }
+
+  inner.querySelectorAll('img').forEach(img => {
+    if (img.complete) return;
+    img.addEventListener('load', () => {
+      if (openCardId === id) {
+        syncOpenCardHeight(id);
+      }
+    });
+  });
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      if (openCardId === id) {
+        syncOpenCardHeight(id);
+      }
+    });
+  }
+
+  setTimeout(() => {
+    if (openCardId === id) syncOpenCardHeight(id);
+  }, 100);
+
+  setTimeout(() => {
+    if (openCardId === id) syncOpenCardHeight(id);
+  }, 500);
+}
+
 async function openCard(id) {
   const card = document.querySelector(`.post-card[data-id="${id}"]`);
   const body = document.getElementById(`body-${id}`);
@@ -221,16 +276,23 @@ async function openCard(id) {
       </div>
     `;
 
-    const quoteEl = inner.querySelector('.post-quote');
-    if (quoteEl) typewriterQuote(quoteEl);
-
     card.classList.add('open');
-    body.style.maxHeight = inner.scrollHeight + 'px';
+    syncOpenCardHeight(id);
+
+    const quoteEl = inner.querySelector('.post-quote');
+    if (quoteEl) {
+      typewriterQuote(quoteEl, () => {
+        if (openCardId === id) syncOpenCardHeight(id);
+      });
+    }
+
+    bindDynamicHeightWatchers(id);
 
     requestAnimationFrame(() => {
       if (window.initPretextDemo) {
         window.initPretextDemo(inner.querySelector('.pretext-stage'));
       }
+      if (openCardId === id) syncOpenCardHeight(id);
     });
     return;
   }
@@ -259,17 +321,23 @@ async function openCard(id) {
       </div>
     `;
 
-    const quoteEl = inner.querySelector('.post-quote');
-    if (quoteEl) typewriterQuote(quoteEl);
-
     card.classList.add('open');
-    body.style.maxHeight = inner.scrollHeight + 'px';
+    syncOpenCardHeight(id);
+
+    const quoteEl = inner.querySelector('.post-quote');
+    if (quoteEl) {
+      typewriterQuote(quoteEl, () => {
+        if (openCardId === id) syncOpenCardHeight(id);
+      });
+    }
+
+    bindDynamicHeightWatchers(id);
 
     requestAnimationFrame(() => {
       if (window.initXssDemo) {
         window.initXssDemo(inner.querySelector('.xss-stage'));
       }
-      body.style.maxHeight = inner.scrollHeight + 'px';
+      if (openCardId === id) syncOpenCardHeight(id);
     });
     return;
   }
@@ -294,22 +362,22 @@ async function openCard(id) {
     <div class="post-body markdown-body">${contentCache[id]}</div>
   `;
 
-  const quoteEl = inner.querySelector('.post-quote');
-  if (quoteEl) typewriterQuote(quoteEl);
-
   card.classList.add('open');
-  body.style.maxHeight = inner.scrollHeight + 'px';
+  syncOpenCardHeight(id);
 
-  inner.querySelectorAll('img').forEach(img => {
-    img.addEventListener('load', () => {
-      body.style.maxHeight = inner.scrollHeight + 'px';
+  const quoteEl = inner.querySelector('.post-quote');
+  if (quoteEl) {
+    typewriterQuote(quoteEl, () => {
+      if (openCardId === id) syncOpenCardHeight(id);
     });
-  });
+  }
+
+  bindDynamicHeightWatchers(id);
 }
 
 /* typewriter quote */
 
-function typewriterQuote(el) {
+function typewriterQuote(el, onTick) {
   const text = el.textContent;
   el.textContent = '';
   el.style.visibility = 'visible';
@@ -317,6 +385,7 @@ function typewriterQuote(el) {
   const interval = setInterval(() => {
     i++;
     el.textContent = text.slice(0, i);
+    if (typeof onTick === 'function') onTick();
     if (i >= text.length) clearInterval(interval);
   }, 30);
 }
