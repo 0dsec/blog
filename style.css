@@ -961,7 +961,6 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 @media (max-width: 600px) {
   html { font-size: 14px; }
   #c-art { margin-top: 20px; }
-  
 
   #ascii-gif {
     padding: 0 8px;
@@ -977,7 +976,7 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   #music-player {
     right: 12px;
     top: 12px;
-    transform: translateY(-6px);
+    margin-top: -6px;
   }
 
   #m-track,
@@ -1014,7 +1013,7 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   #music-player {
     right: 12px;
     top: 12px;
-    transform: translateY(-6px);
+    margin-top: -6px;
   }
 
   #m-track,
