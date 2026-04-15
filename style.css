@@ -974,8 +974,8 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   .card-body-inner { padding: 0 1rem 1rem; }
 
   #music-player {
-    right: 10px;
-    top: 10px;
+    right: 16px;
+    top: 12px;
   }
 
   #m-track,
