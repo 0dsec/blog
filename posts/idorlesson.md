@@ -69,11 +69,11 @@ Start at `?id=1` and work up. Real attackers do it the same way, usually with au
 Either way, the point of this post isn't just to teach you one dumb trick. It's to train your instincts. When you see an identifier in a URL, your first thought should always be: *what happens if I change this?*
 
 - **Never trust the URL bar.** The user owns it.
-- **Never trust the client.** It lies.
+- **Never trust the client.** clients lie.
 - **Always enforce authorization on the server**, on every request, for every resource.
 - **Sequential IDs are a red flag**, but UUIDs aren't a fix. They just slow down enumeration. The fix is the authorization check.
 
-and always remember
+and remember
 
 *The address bar is an input field. Treat it like one.*
 
