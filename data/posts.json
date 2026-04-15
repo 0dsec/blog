@@ -24,7 +24,7 @@
     "id": 2,
     "title": "Broken Access Control",
     "date": "04-09-2026",
-    "tags": ["Cybersec","Web App Hacking","Webdev", "Hack This Website", "Live Demo"],
+    "tags": ["Cybersec","Web App Hacking", "Hack This Website", "Live Demo"],
     "file": "BAC.md",
     "quote": "client side validation is a suggestion, not a wall!",
     "description": "Wanna learn how to hack a website? lol"
@@ -61,7 +61,7 @@
     "id": 7,
     "title": "Insecure Direct Object Reference",
     "date": "04-13-2026",
-    "tags": ["Cybersec","Web App Hacking","Webdev","Hack This Website","Live Demo"],
+    "tags": ["Cybersec","Web App Hacking","Hack This Website","Live Demo"],
     "file": "idorlesson.md",
     "quote": "client side validation is a suggestion, not a wall!",
     "description": "more ways to access things you should not have access to lol"
