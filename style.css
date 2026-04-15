@@ -974,7 +974,7 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   .card-body-inner { padding: 0 1rem 1rem; }
 
   #music-player {
-    right: 16px;
+    right: 12px;
     top: 12px;
   }
 
@@ -1010,7 +1010,7 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 
 @media (max-width: 420px) {
   #music-player {
-    right: 16px;
+    right: 12px;
     top: 12px;
   }
 
