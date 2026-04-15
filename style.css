@@ -959,7 +959,6 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   .card-header { padding: 0.85rem 1rem; }
   .card-body-inner { padding: 0 1rem 1rem; }
 
-  /* Tighten music player to match GitHub icon alignment */
   #music-player {
     right: 10px;
     top: 12px;
@@ -996,7 +995,6 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 }
 
 @media (max-width: 420px) {
-  /* Maintain tight corner alignment on smaller phones */
   #music-player {
     right: 10px;
     top: 12px;
