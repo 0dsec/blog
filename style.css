@@ -271,7 +271,6 @@ a:hover { opacity: 0.75; }
   animation: fadeIn 0.4s ease-out 0.2s both;
 }
 
-
 /* tag filter */
 #tag-filter {
   width: 100%;
@@ -313,8 +312,9 @@ a:hover { opacity: 0.75; }
 
 .locked-tag-wrap {
   position: relative;
-  display: inline-flex;
-  align-items: center;
+  display: inline-block;
+  flex: 0 0 auto;
+  line-height: 1;
 }
 
 .tag-btn.locked {
@@ -333,10 +333,11 @@ a:hover { opacity: 0.75; }
 .locked-tooltip {
   position: absolute;
   left: 50%;
-  bottom: calc(100% + 10px);
-  transform: translateX(-50%) translateY(4px);
+  top: calc(100% + 10px);
+  bottom: auto;
+  transform: translateX(-50%) translateY(-4px);
   min-width: 240px;
-  max-width: 320px;
+  max-width: min(320px, calc(100vw - 2rem));
   padding: 0.75rem 0.9rem;
   border: 1px solid var(--tag-border);
   background: var(--bg-card);
@@ -351,18 +352,19 @@ a:hover { opacity: 0.75; }
   pointer-events: none;
   transition: opacity 0.18s ease, transform 0.18s ease;
   z-index: 1200;
+  white-space: normal;
 }
 
 .locked-tooltip::after {
   content: "";
   position: absolute;
-  top: 100%;
+  bottom: 100%;
   left: 50%;
   width: 10px;
   height: 10px;
   background: var(--bg-card);
-  border-right: 1px solid var(--tag-border);
-  border-bottom: 1px solid var(--tag-border);
+  border-left: 1px solid var(--tag-border);
+  border-top: 1px solid var(--tag-border);
   transform: translateX(-50%) rotate(45deg);
 }
 
@@ -940,6 +942,7 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   .card-header { padding: 0.85rem 1rem; }
   .card-body-inner { padding: 0 1rem 1rem; }
 
+  /* music player shrinks to fit narrow screens */
   #music-player {
     right: 8px;
     top: 8px;
@@ -973,31 +976,10 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
     width: 22px;
     height: 22px;
   }
-
-  .pretext-stage {
-    height: 300px;
-  }
-
-  .locked-tooltip {
-    left: 0;
-    bottom: calc(100% + 8px);
-    transform: translateX(0) translateY(4px);
-    min-width: 220px;
-    max-width: min(280px, calc(100vw - 2rem));
-  }
-
-  .locked-tooltip::after {
-    left: 24px;
-    transform: rotate(45deg);
-  }
-
-  .locked-tag-wrap:hover .locked-tooltip,
-  .locked-tag-wrap:focus-within .locked-tooltip {
-    transform: translateX(0) translateY(0);
-  }
 }
 
 @media (max-width: 420px) {
+  /* even tighter for phones */
   #m-track,
   #m-progress {
     width: 70px;
@@ -1011,9 +993,5 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   #github-link img {
     width: 20px;
     height: 20px;
-  }
-
-  .pretext-stage {
-    height: 240px;
   }
 }
