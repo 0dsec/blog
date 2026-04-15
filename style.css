@@ -944,7 +944,7 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 
   /* music player shrinks to fit narrow screens */
   #music-player {
-    right: 8px;
+    right: 48px;
     top: 8px;
   }
 
@@ -980,6 +980,11 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 
 @media (max-width: 420px) {
   /* even tighter for phones */
+  #music-player {
+    right: 56px;
+    top: 8px;
+  }
+
   #m-track,
   #m-progress {
     width: 70px;
