@@ -942,9 +942,8 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
   .card-header { padding: 0.85rem 1rem; }
   .card-body-inner { padding: 0 1rem 1rem; }
 
-  /* music player shrinks to fit narrow screens */
   #music-player {
-    right: 48px;
+    right: 20px;
     top: 8px;
   }
 
@@ -979,9 +978,8 @@ body.initial-load .post-card:nth-child(n+11) { animation-delay: 1.5s; }
 }
 
 @media (max-width: 420px) {
-  /* even tighter for phones */
   #music-player {
-    right: 56px;
+    right: 24px;
     top: 8px;
   }
 
