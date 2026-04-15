@@ -79,7 +79,7 @@ const ART = [
   `  \\$$  \\$$$ \\$$    $$ \\$$    $$|  $$    \\ \\$$     \\`,
   `   \\$$$$$$   \\$$$$$$$  \\$$$$$$$ \\$$$$$$$$  \\$$$$$$$`,
   `                                                    `,
-  `          _GAMEDEV  _WEBDEV  _CYBERSEC  _ART     `,
+  `          _CYBERSEC  _WEBDEV  _GAMEDEV  _ART     `,
   `                                                    `,
   `                      0dze@pm.me`
 ];
