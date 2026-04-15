@@ -288,6 +288,9 @@ a:hover { opacity: 0.75; }
   gap: 0.4rem;
   justify-content: center;
   animation: fadeIn 0.4s ease-out 0.4s both;
+  position: relative;
+  z-index: 3000;
+  overflow: visible;
 }
 
 .tag-btn {
@@ -321,6 +324,7 @@ a:hover { opacity: 0.75; }
   display: inline-block;
   flex: 0 0 auto;
   line-height: 1;
+  z-index: 3001;
 }
 
 .tag-btn.locked {
@@ -357,8 +361,13 @@ a:hover { opacity: 0.75; }
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.18s ease, transform 0.18s ease;
-  z-index: 1200;
+  z-index: 9999;
   white-space: normal;
+}
+
+#post-list {
+  position: relative;
+  z-index: 1;
 }
 
 .locked-tooltip::after {
@@ -389,6 +398,8 @@ a:hover { opacity: 0.75; }
 }
 
 .post-card {
+  position: relative;
+  z-index: 1;
   border: 1px solid var(--border);
   background: var(--bg-card);
   margin-bottom: 0.75rem;
