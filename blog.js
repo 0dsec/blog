@@ -71,8 +71,15 @@ function buildTagFilter() {
 
   tagFilter.innerHTML = tags.map(t => {
     if (t === 'LOCKED') {
-      return `<button class="tag-btn locked" data-tag="LOCKED" disabled title="LOCKED CONTENT! Try to hack this button!
-Check out the post called Broken Access Control for full tutorial!">LOCKED</button>`;
+      return `
+        <span class="locked-tag-wrap">
+          <button class="tag-btn locked" data-tag="LOCKED" disabled>LOCKED</button>
+          <span class="locked-tooltip" role="tooltip">
+            LOCKED CONTENT! Try to hack this button!<br>
+            Check out the post called Broken Access Control for full tutorial!
+          </span>
+        </span>
+      `;
     }
     return `<button class="tag-btn${t === activeTag ? ' active' : ''}" data-tag="${t}">${t}</button>`;
   }).join('');
@@ -94,11 +101,14 @@ Check out the post called Broken Access Control for full tutorial!">LOCKED</butt
   });
 
   const lockedBtn = tagFilter.querySelector('.tag-btn.locked');
-  if (lockedBtn) {
+  const lockedWrap = tagFilter.querySelector('.locked-tag-wrap');
+  if (lockedBtn && lockedWrap) {
     const observer = new MutationObserver(() => {
       if (!lockedBtn.disabled) {
         lockedBtn.classList.remove('locked');
-        lockedBtn.removeAttribute('title');
+        const tooltip = lockedWrap.querySelector('.locked-tooltip');
+        if (tooltip) tooltip.remove();
+        lockedWrap.replaceWith(lockedBtn);
         observer.disconnect();
       }
     });
@@ -125,7 +135,7 @@ function renderPosts() {
           <time class="post-date">${post.date}</time>
           ${post.pinned ? '<span class="pinned-label">PINNED</span>' : ''}
           <div class="post-tags">
-            ${post.tags.map(t => `<span class="tag" data-tag="${t}">${t}</span>`).join('')}
+            ${renderPostTags(post.tags)}
           </div>
         </div>
         <div class="post-title">${post.title}</div>
@@ -143,10 +153,18 @@ function renderPosts() {
 
   postList.querySelectorAll('.card-header').forEach(header => {
     header.addEventListener('click', (e) => {
+      const moreToggle = e.target.closest('.tag-more');
+      if (moreToggle) {
+        e.stopPropagation();
+        toggleExtraTags(moreToggle);
+        return;
+      }
+
       const tagEl = e.target.closest('.tag');
       if (tagEl) {
         e.stopPropagation();
         const tag = tagEl.dataset.tag;
+        if (!tag) return;
         activeTag = tag;
         openRequestToken++;
         tagFilter.querySelectorAll('.tag-btn').forEach(b => {
@@ -163,6 +181,50 @@ function renderPosts() {
       toggleCard(id);
     });
   });
+}
+
+function renderPostTags(tags) {
+  const visibleTags = tags.slice(0, 4);
+  const hiddenTags = tags.slice(4);
+
+  const visibleHtml = visibleTags
+    .map(t => `<span class="tag" data-tag="${escapeHtml(t)}">${escapeHtml(t)}</span>`)
+    .join('');
+
+  if (hiddenTags.length === 0) {
+    return visibleHtml;
+  }
+
+  const hiddenHtml = hiddenTags
+    .map(t => `<span class="tag extra-tag" data-tag="${escapeHtml(t)}" hidden>${escapeHtml(t)}</span>`)
+    .join('');
+
+  return `
+    ${visibleHtml}
+    ${hiddenHtml}
+    <span class="tag tag-more" data-expanded="false" aria-label="Show more tags">+</span>
+  `;
+}
+
+function toggleExtraTags(toggleEl) {
+  const tagsContainer = toggleEl.closest('.post-tags');
+  if (!tagsContainer) return;
+
+  const extraTags = tagsContainer.querySelectorAll('.extra-tag');
+  const expanded = toggleEl.dataset.expanded === 'true';
+
+  extraTags.forEach(tag => {
+    tag.hidden = expanded;
+  });
+
+  toggleEl.dataset.expanded = expanded ? 'false' : 'true';
+  toggleEl.textContent = expanded ? '+' : '−';
+  toggleEl.setAttribute(
+    'aria-label',
+    expanded ? 'Show more tags' : 'Hide extra tags'
+  );
+
+  tagsContainer.appendChild(toggleEl);
 }
 
 /* expand / collapse */
@@ -426,4 +488,13 @@ function typewriterQuote(el, onTick) {
     if (typeof onTick === 'function') onTick();
     if (i >= text.length) clearInterval(interval);
   }, 30);
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
 }
