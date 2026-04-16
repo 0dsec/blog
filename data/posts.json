@@ -1,15 +1,5 @@
 [
   {
-    "id": 3,
-    "title": "Insecure Direct Object Reference",
-    "date": "04-09-2026",
-    "tags": ["Cybersec","Web App Hacking","Webdev","Hack This Website","Live Demo"],
-    "file": "idor.md",
-    "quote": "You little fuckin cyber criminal!",
-    "description": "hidden lesson.",
-    "hidden": true
-  },
-  {
     "id": 1,
     "title": "About Me",
     "date": "04-09-2026",
@@ -30,7 +20,7 @@
     "description": "Wanna learn how to hack a website? lol"
   },
   {
-    "id": 4,
+    "id": 200,
     "title": "You Hacked 0dze.sh!",
     "date": "04-09-2026",
     "tags": ["LOCKED"],
@@ -39,7 +29,17 @@
     "description": "If you can read this, you have successfully exploited broken access control. Congrats!"
   },
   {
-    "id": 5,
+    "id": 3,
+    "title": "Insecure Direct Object Reference",
+    "date": "04-09-2026",
+    "tags": ["Cybersec","Web App Hacking","Webdev","Hack This Website","Live Demo"],
+    "file": "idor.md",
+    "quote": "You little fuckin cyber criminal!",
+    "description": "hidden lesson.",
+    "hidden": true
+  },
+  {
+    "id": 4,
     "title": "Welcome To Lumberton!",
     "date": "04-12-2026",
     "tags": ["Movies", "Art"],
@@ -48,7 +48,7 @@
     "description": "rip goat"
   },
   {
-    "id": 6,
+    "id": 5,
     "title": "Do you need a website made?",
     "date": "04-13-2026",
     "tags": ["Webdev"],
@@ -58,7 +58,7 @@
     "pinned": "true"
   },
   {
-    "id": 7,
+    "id": 6,
     "title": "Insecure Direct Object Reference",
     "date": "04-13-2026",
     "tags": ["Cybersec","Web App Hacking","Hack This Website","Live Demo", "Webdev"],
@@ -67,18 +67,17 @@
     "description": "more ways to access things you should not have access to lol"
   },
   {
-    "id": 8,
-    "title": "Pretext Live Demo",
-    "date": "05-07-2026",
-    "tags": ["Webdev","JS", "Programming", "Live Demo"],
-    "custom": "pretext",
-    "file": "pretext-intro.md",
-    "quote": "Chenglou the goat fr",
-    "description": "Check out this live demo! It took me forever! lol",
-    "repo": "https://github.com/0dsec/Pretext-Demo"
+    "id": 7,
+    "title": "Reflected XSS",
+    "date": "04-25-2026",
+    "tags": ["Cybersec","Web App Hacking","Hack This Website","Live Demo", "Webdev"],
+    "custom": "xss",
+    "file": "xss-lesson.md",
+    "quote": "if the browser trusts it, it runs it.",
+    "description": "An interactive lesson on reflected cross-site scripting. Type a payload, see it execute."
   },
   {
-    "id": 9,
+    "id": 8,
     "title": "Pirating Without Getting Caught!",
     "date": "05-14-2026",
     "tags": ["Cybersec", "Piracy", "OPSEC"],
@@ -87,7 +86,7 @@
     "description": "It's EASY!"
   }, 
   {
-    "id": 10,
+    "id": 9,
     "title": "I <3 Tarkovsky",
     "date": "05-28-2026",
     "tags": ["Movies", "Art"],
@@ -96,13 +95,14 @@
     "description": "If you've never watched stalker go do that fr"
   },
   {
-    "id": 11,
-    "title": "Reflected XSS",
-    "date": "06-12-2026",
-    "tags": ["Cybersec","Web App Hacking","Hack This Website","Live Demo", "Webdev"],
-    "custom": "xss",
-    "file": "xss-lesson.md",
-    "quote": "if the browser trusts it, it runs it.",
-    "description": "An interactive lesson on reflected cross-site scripting. Type a payload, see it execute."
+    "id": 10,
+    "title": "Pretext Live Demo",
+    "date": "05-07-2026",
+    "tags": ["Webdev","JS", "Programming", "Live Demo"],
+    "custom": "pretext",
+    "file": "pretext-intro.md",
+    "quote": "Chenglou the goat fr",
+    "description": "Check out this live demo! It took me forever! lol",
+    "repo": "https://github.com/0dsec/Pretext-Demo"
   }
 ]
