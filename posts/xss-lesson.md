@@ -41,26 +41,48 @@ The user's raw input gets concatenated into HTML and sent to the browser. The br
 
 ## how to spot a potential xss sink
 
-One of the easiest ways to identify a possible XSS vulnerability is simple: type something into a search box (or any input), submit it, and look at how the page responds.
+One of the easiest ways to identify a possible XSS vulnerability is simple—type something into a search box (or any input), submit it, and look at how the page responds.
 
 If the site shows your exact input back to you, for example:
+`Results for: test123`
 
-Results for: `test123`
 
-that means your data is being reflected into the page.
+That means your data is being reflected into the page.
 
 That alone isn’t a vulnerability. Modern frameworks escape output by default, so even if your input is reflected, it might be rendered safely as plain text.
 
-The red flag is how it’s reflected.
+The red flag is **how** it’s reflected.
 
-If your input is inserted into the page in a way that looks like raw HTML (not escaped), you may have found a potential XSS sink. A quick way to probe this is to slightly modify your input:
+---
 
-Try adding characters like < and >
-See if they show up as is, or get converted to `&lt;` and `&gt;`
+## extra signal: instant reflection
 
-If the browser treats your input as actual markup instead of text, that’s when the red flags start to fly
+Another thing to pay attention to is when your input shows up. If you type into a field and your input appears on the page immediately, without a page reload, that usually means JavaScript is updating the page dynamically in your browser.
 
-A page that reflects input directly into the DOM without proper escaping is worth investigating further.
+This is important because it often indicates client-side rendering, which can introduce a different class of bugs known as DOM-based XSS. (separate post about this vuln in the future!)
+
+In these cases, your input might be getting inserted into the page using JavaScript functions like:
+
+`innerHTML`
+`insertAdjacentHTML`
+`document.write`
+
+If those are used unsafely, they can become true XSS sinks.
+
+On the other hand, if the page reloads and then shows your input, the reflection is likely happening on the server side instead. Both scenarios are worth testing—the key difference is where the data is being handled.
+
+---
+
+## how it’s rendered (the real test)
+
+Once you know where the input is handled, the next step is to figure out how it’s rendered. If your input is inserted into the page in a way that looks like raw HTML (not escaped), you may have found a potential XSS sink.
+
+A quick way to probe this is to slightly modify your input:
+
+- Try adding characters like `<` and `>`
+- See if they show up as is, or get converted to `&lt;` and `&gt;`
+
+If the browser treats your input as actual markup instead of text, that’s when the red flags start to fly. A page that writes user input into the page as raw HTML without proper escaping is worth investigating further.
 
 ## the fix
 
