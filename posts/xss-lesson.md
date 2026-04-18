@@ -126,7 +126,7 @@ Type something normal first and hit search, you'll see your input reflected in t
 <marquee onstart=alert('XSS')>this should not be happening right now lol</marquee>
 ```
 
-There are massive lists of payloads you can execute on various websites. I'll link some below. In the future I'll do another post about XSS where we talk about specific payloads and why certain ones work in certain contexts. We will also cover things like automating XSS with python and selenium as well as taking a look at some github repos for other peoples automation solutions. Have fun!
+There are massive lists of payloads you can execute on various websites. I'll link some below. In the future I'll do another post about XSS where we talk about specific payloads and why certain ones work in certain contexts. We will also cover things like automating XSS with python and selenium as well as taking a look at some github repos for other peoples automation solutions. Have fun :]
 
 RESOURCES!
 
