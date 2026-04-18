@@ -1,6 +1,6 @@
 /* playlist */
 const playlist = [
-  { title: 'loop', artist: '0daze', file: 'music/loop.wav' },
+  { title: 'loop', artist: '0daze', file: 'music/loopshort.wav' },
   { title: 'loop2', artist: '0daze', file: 'music/dark1a.wav' }
 ];
 
