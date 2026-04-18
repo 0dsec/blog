@@ -127,3 +127,15 @@ Type something normal first and hit search, you'll see your input reflected in t
 ```
 
 There are massive lists of payloads you can execute on various websites. I'll link some below. In the future I'll do another post about XSS where we talk about specific payloads and why certain ones work in certain contexts. We will also cover things like automating XSS with python and selenium as well as taking a look at some github repos for other peoples automation solutions. Have fun!
+
+RESOURCES!
+
+- [PortSwigger Web Security Academy — Cross-site scripting (XSS)](https://portswigger.net/web-security/cross-site-scripting)
+- [OWASP — Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/)
+- [OWASP Top 10 2025 — A03 Injection](https://owasp.org/Top10/2025/A03_2025-Injection/)
+- [Hack The Box Academy — Cross-Site Scripting (XSS)](https://academy.hackthebox.com/course/preview/cross-site-scripting-xss)
+- [TryHackMe — Intro to Cross-site Scripting](https://tryhackme.com/room/xss)
+- [PayloadBox — XSS Payload List (GitHub)](https://github.com/payloadbox/xss-payload-list)
+- [PortSwigger XSS Cheat Sheet (Interactive Payloads)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
+
+## XSS DEMO BELOW!!!
