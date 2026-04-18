@@ -9,11 +9,19 @@
     "description": "who am i?",
     "repo": "https://github.com/0dsec/"
   },
-
   {
     "id": 2,
-    "title": "Broken Access Control",
+    "title": "Welcome To Lumberton!",
     "date": "04-09-2026",
+    "tags": ["Movies", "Art"],
+    "file": "lumberton.md",
+    "quote": "You receive a love letter from me, you're fucked forever!",
+    "description": "rip goat"
+  },
+  {
+    "id": 3,
+    "title": "Broken Access Control",
+    "date": "04-12-2026",
     "tags": ["Cybersec","Web App Hacking", "Hack This Website", "Live Demo", "Webdev", "lvl 1"],
     "file": "BAC.md",
     "quote": "client side validation is a suggestion, not a wall!",
@@ -22,16 +30,16 @@
   {
     "id": 200,
     "title": "You Hacked 0dze.sh!",
-    "date": "04-09-2026",
+    "date": "04-12-2026",
     "tags": ["LOCKED"],
     "file": "locked.md",
     "quote": "you are now ready to take on the gov bro how does it feel",
     "description": "If you can read this, you have successfully exploited broken access control. Congrats!"
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "Insecure Direct Object Reference",
-    "date": "04-09-2026",
+    "date": "04-13-2026",
     "tags": ["Cybersec","Web App Hacking","Webdev","Hack This Website","Live Demo", "lvl 1"],
     "file": "idor.md",
     "quote": "You little fuckin cyber criminal!",
@@ -39,18 +47,9 @@
     "hidden": true
   },
   {
-    "id": 4,
-    "title": "Welcome To Lumberton!",
-    "date": "04-12-2026",
-    "tags": ["Movies", "Art"],
-    "file": "lumberton.md",
-    "quote": "You receive a love letter from me, you're fucked forever!",
-    "description": "rip goat"
-  },
-  {
     "id": 5,
     "title": "Do you need a website made?",
-    "date": "04-13-2026",
+    "date": "04-14-2026",
     "tags": ["Webdev"],
     "file": "websitead.md",
     "quote": "Lets talk!",
@@ -64,17 +63,17 @@
     "tags": ["Cybersec","Web App Hacking","Hack This Website","Live Demo", "Webdev", "lvl 1"],
     "file": "idorlesson.md",
     "quote": "client side validation is a suggestion, not a wall!",
-    "description": "more ways to access things you should not have access to lol"
+    "description": "more ways to access things you should not have access to haha"
   },
   {
     "id": 7,
     "title": "Reflected XSS",
-    "date": "04-25-2026",
+    "date": "04-17-2026",
     "tags": ["Cybersec","Web App Hacking","Hack This Website","Live Demo", "Webdev", "lvl 1"],
     "custom": "xss",
     "file": "xss-lesson.md",
     "quote": "if the browser trusts it, it runs it.",
-    "description": "An interactive lesson on reflected cross-site scripting. Type a payload, see it execute."
+    "description": "executing payloads through unsanitized user input like a silly goose"
   },
   {
     "id": 8,
