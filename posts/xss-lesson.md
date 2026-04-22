@@ -130,7 +130,7 @@ The attacker crafts a malicious URL with the payload embedded in a query paramet
 
 This is a static site, so technically there's no server to reflect off of. So the demo below simulates server-side reflection on the client. It uses the browser's HTML parser to process your input the same way a server-rendered page would. Raw input goes in, the parser sees it as real markup, and everything executes.
 
-Type something normal first and hit search, you'll see your input reflected in the results. Then try these:
+Type something normal first and hit search, you'll see your input reflected in the results. Then try these payloads:
 
 ```
 <script>alert('ayyy! XSS ACHIEVED! :]')</script>
