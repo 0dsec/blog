@@ -73,7 +73,7 @@ On the other hand, if the page reloads and then shows your input, the reflection
 
 ---
 
-## how it’s rendered (the real test)
+## how it’s rendered
 
 Once you know where the input is handled, the next step is to figure out how it’s rendered. If your input is inserted into the page in a way that looks like raw HTML (not escaped), you may have found a potential XSS sink.
 
