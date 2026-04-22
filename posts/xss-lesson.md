@@ -41,7 +41,7 @@ The user's raw input gets concatenated into HTML and sent to the browser. The br
 
 ## how to spot a potential xss sink
 
-One of the easiest ways to identify a possible XSS vulnerability is simple—type something into a search box (or any input), submit it, and look at how the page responds.
+One of the easiest ways to identify a possible XSS vulnerability is simple, type something into a search box (or any input), submit it, and look at how the page responds.
 
 If the site shows your exact input back to you, for example:
 `Results for: test123`
