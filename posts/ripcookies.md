@@ -1,6 +1,6 @@
 Chrome just made cookie replay a lot less useful and I am sad lol
 
-They rolled out device-bound sessions (DBSC). Basically your Google session isn’t just a blob you can lift and drop somewhere else anymore. It’s tied to a hardware backed key on the victim’s TPM module. As of windows 11 TPM chips are required on all motherboards so in theory if you're on windows 11 this protection is already applied to you. You might need to log out of your google account and log back in to activate it, I didn't test though. I believe windows 10 users can also use this protection but they may need to turn it on manually since not every windows 10 machine requires TPM.
+They rolled out device-bound sessions (DBSC). Basically a Google session isn’t just a blob you can lift and drop somewhere else anymore. It’s tied to a hardware backed key on the victim’s TPM module. As of windows 11 TPM chips are required on all motherboards so in theory if you're on windows 11 this protection is already applied to you. You might need to log out of your google account and log back in to activate it, I didn't test though. I believe windows 10 users can also use this protection but they may need to turn it on manually since not every windows 10 machine requires TPM.
 
 What changed under the hood is the cookie alone isn’t enough to steal a session anymore on chromium based browsers. The browser now has to prove possession of the TPM chips private key which never leaves the device. If you don't have the key then, no session reuse.
 
