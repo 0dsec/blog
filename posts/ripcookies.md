@@ -28,7 +28,7 @@ Mass infostealer campaigns depended on reusing sessions from centralized infrast
 4. Other entry points stay the same
 Phishing, token theft, account recovery abuse, none of that goes away. This only tightens one specific angle: session portability.
 
-If anyone is hiding some kind of TPM exploit than lmk lmao. The path of least resistance is to work around that, not through it though so keep that in mind. I'm sure isreal or some fuck ass nation state out there has a TPM exploit that we'll all hear about in like 10 years or something but until then this is a pretty good security update unfortunately. (or fortunatly depending on who you ask lol) 
+If anyone is hiding some kind of TPM exploit then lmk lmao. The path of least resistance is to work around that, not through it though so keep that in mind. I'm sure isreal or some fuck ass nation state out there has a TPM exploit that we'll all hear about in like 10 years or something but until then this is a pretty good security update unfortunately. (or fortunatly depending on who you ask lol) 
 
 if your workflow depended on lifting cookies and reusing them elsewhere, expect inconsistent results going forward, at least for high value targets like Google accounts in Chrome. Access isn’t gone, but it’s more tied to where you got it.
 
