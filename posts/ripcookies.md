@@ -10,6 +10,8 @@ dump cookies
 load into fresh browser
 access account
 
+is effectively cooked.
+
 If you exfiltrate the cookie and try to replay it off-device, it fails because you can’t complete the signing step. And the key isn’t extractable in any practical sense.
 
 Cookie harvesting isn’t dead, but it’s no longer portable. Value of a dump depends on whether you can actually use it from the original environment.
