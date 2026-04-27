@@ -1,5 +1,3 @@
-/* wavy ascii logo — shared across pages */
-
 const ART_FONT_SIZE  = 14;
 const ART_LINE_H     = 20;
 const ART_FONT       = `${ART_FONT_SIZE}px "Courier New", Courier, monospace`;
@@ -12,8 +10,8 @@ const WAVE_FREQ      = 0.055;
 const WAVE_SPEED     = 1.3;
 const REPEL_RADIUS    = 80;
 const REPEL_STRENGTH  = 28;
-const SPRING_K = 0.07;  // softer spring → slower, more natural oscillation
-const DAMPING  = 0.88;  // high damping → velocity carries through before settling
+const SPRING_K = 0.07;  
+const DAMPING  = 0.88; 
 
 const ART = [
   `   ______         __                               `,
@@ -129,7 +127,6 @@ const ART = [
       const wantDX = targetDX + repelDX;
       const wantDY = targetDY + repelDY;
 
-      // damped spring: velocity can overshoot → jiggle
       cells[k + 5] = (cells[k + 5] + (wantDX - cells[k + 3]) * SPRING_K) * DAMPING;
       cells[k + 6] = (cells[k + 6] + (wantDY - cells[k + 4]) * SPRING_K) * DAMPING;
       cells[k + 3] += cells[k + 5];
