@@ -10,10 +10,9 @@ const WAVE_AMP_Y     = 5;
 const WAVE_AMP_X     = 1.2;
 const WAVE_FREQ      = 0.055;
 const WAVE_SPEED     = 1.3;
-const REPEL_RADIUS    = 80;
-const REPEL_STRENGTH  = 28;
-const SPRING_K = 0.07;  // softer spring → slower, more natural oscillation
-const DAMPING  = 0.88;  // high damping → velocity carries through before settling
+const REPEL_RADIUS   = 80;
+const REPEL_STRENGTH = 28;
+const SPRING_EASE    = 0.12;
 
 const ART = [
   `   ______         __                               `,
@@ -80,9 +79,7 @@ const ART = [
           i,                    // 1: lineIdx
           ci,                   // 2: charIdx
           0,                    // 3: curDX
-          0,                    // 4: curDY
-          0,                    // 5: velX
-          0                     // 6: velY
+          0                     // 4: curDY
         );
       }
     }
@@ -100,7 +97,7 @@ const ART = [
     const cells    = artCells;
     const baseYs   = artBaseYs;
     const cellsLen = cells.length;
-    const STRIDE   = 7;
+    const STRIDE   = 5;
 
     for (let k = 0; k < cellsLen; k += STRIDE) {
       const baseX   = cells[k];
@@ -111,7 +108,7 @@ const ART = [
 
       const baseY = baseYs[lineIdx];
 
-      const phase    = baseX * WAVE_FREQ - artTime * WAVE_SPEED;
+      const phase   = baseX * WAVE_FREQ - artTime * WAVE_SPEED;
       const targetDX = Math.sin(phase + 1.3) * WAVE_AMP_X;
       const targetDY = Math.sin(phase)       * WAVE_AMP_Y;
 
@@ -129,11 +126,8 @@ const ART = [
       const wantDX = targetDX + repelDX;
       const wantDY = targetDY + repelDY;
 
-      // damped spring: velocity can overshoot → jiggle
-      cells[k + 5] = (cells[k + 5] + (wantDX - cells[k + 3]) * SPRING_K) * DAMPING;
-      cells[k + 6] = (cells[k + 6] + (wantDY - cells[k + 4]) * SPRING_K) * DAMPING;
-      cells[k + 3] += cells[k + 5];
-      cells[k + 4] += cells[k + 6];
+      cells[k + 3] += (wantDX - cells[k + 3]) * SPRING_EASE;
+      cells[k + 4] += (wantDY - cells[k + 4]) * SPRING_EASE;
 
       artCtx.fillText(ch, baseX + cells[k + 3], baseY + cells[k + 4]);
     }
