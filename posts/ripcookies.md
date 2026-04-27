@@ -32,6 +32,4 @@ Phishing, token theft, account recovery abuse, none of that goes away. This only
 
 If anyone is hiding some kind of TPM exploit then lmk lmao. I'm sure isreal or some fuck ass nation state out there has a TPM exploit that we'll all hear about in like 10 years or something but until then this is a pretty good security update unfortunately. (or fortunatly depending on who you ask lol) 
 
-if your workflow depended on lifting cookies and reusing them elsewhere, expect inconsistent results going forward, at least for high value targets like Google accounts in Chrome. Access isn’t gone, but it’s more tied to where you got it.
-
-rip session cookie replay fr :[
+if your workflow depended on lifting cookies and reusing them elsewhere, expect inconsistent results going forward, at least for high value targets like Google accounts in Chrome. Access isn’t gone, but it’s more tied to where you got it now.
